@@ -10,6 +10,26 @@ Vue.use(Element)
 
 Vue.config.productionTip = false
 
+router.beforeEach(async(to, from, next) => {
+  const token = sessionStorage.token
+  if (token) {
+    if (to.path === '/') {
+      next()
+    } else {
+      next()
+      // try {
+      //   next({ path: '/main' })
+      // } catch(error) {
+      //   sessionStorage.clear()
+      //   next({ path: '/' })
+      // }
+    }
+  } else {
+    console.log(1111);
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

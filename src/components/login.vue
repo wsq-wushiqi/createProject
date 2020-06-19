@@ -18,6 +18,7 @@
 <script>
 import { encrypt, decrypt } from '../utils/aes'
 import { login } from '../utils/api'
+import router from '../router'
 
 export default {
   data() {
@@ -28,12 +29,17 @@ export default {
   },
   methods: {
     login: function() {
+      // const _this = this
       const data = {
         username: encrypt(this.username),
         password: encrypt(this.password)
       }
       login(data).then(response => {
+        sessionStorage.setItem('token', response.data._csrf)
         console.log(response.data);
+        console.log(this.$router);
+        
+        this.$router.push({ path: '/main' })
       })
     }
   }

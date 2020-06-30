@@ -1,13 +1,13 @@
 <template>
   <div class="main-container">
     <el-container>
-      <el-header class="page-header">
-        <el-button class="logout-button" @click="logout">退出</el-button>
-      </el-header>
+      <el-aside class="page-aside" width="260px">
+        <Menu />
+      </el-aside>
       <el-container>
-        <el-aside class="page-aside" width="260px">
-          <Menu />
-        </el-aside>
+        <el-header height="60px" class="page-header">
+          <el-button class="logout-button" @click="logout">退出</el-button>
+        </el-header>
         <el-main class="page-main">Main</el-main>
       </el-container>
     </el-container>
@@ -16,7 +16,7 @@
 
 <script>
 import { logout } from '../utils/api'
-import { Menu } from './index'
+import { Menu } from '../components/index'
 export default {
   components: {
     Menu
@@ -53,11 +53,14 @@ export default {
 }
 .page-header {
   text-align: right;
+  /* width: 100%; */
+  padding: 0;
   background-color: rgb(229, 234, 235);
 }
 .page-aside {
-  background-color: azure;
-  height: calc(100vh - 60px);
+  background-color: rgb(255, 255, 255);
+  /* height: calc(100vh - 60px); */
+  height: calc(100vh);
 }
 .page-main {
   background-color: rgb(201, 223, 224);

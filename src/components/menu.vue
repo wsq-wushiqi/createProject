@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div class="logo-image">
+      <!-- <img src="../assets/logo1.png" style="width: 123px; height:50px; margin:4px 5px 2px 5px;"> -->
+      <el-image
+        style="width: 100%; height:50px; margin:4px 5px 2px 5px;"
+        :src="require('../assets/logo1.png')"
+      />
+    </div>
     <el-menu>
       <!-- <fragment> -->
         <template v-for="item in menuList">
@@ -46,6 +53,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.logo-image {
+  padding: 0;
+}
 </style>

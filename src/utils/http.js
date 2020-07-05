@@ -1,7 +1,5 @@
 import axios from 'axios'
 import qs from 'qs'
-import config from '../../config'
-import router from '../router'
 
 axios.defaults.timeout = 10000
 axios.defaults.baseURL = window.global_config.BASE_URL + '/ppu/web'

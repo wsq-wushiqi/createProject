@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/ppu/web/*': {
-        target: 'http://172.16.28.186:8080', // 目标接口域名
+        target: 'http://172.16.38.90:8080', // 目标接口域名
         changeOrigin: true // 是否跨域
       }
     },

@@ -1,6 +1,21 @@
 <template>
   <div class="page-container">
     <!-- <div class="page-head" /> -->
+    <el-select
+      v-model="value"
+      filterable
+      remote
+      reserve-keyword
+      placeholder="请输入关键词"
+      :remote-method="remoteMethod"
+      :loading="loading">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
     <div class="login-box">
       <span class="login-title">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</span>
       <el-form>
@@ -28,8 +43,34 @@ export default {
   data() {
     return {
       username: 'ppu_wbzxryA',
-      password: 'Dm123456'
+      password: 'Dm123456',
+      options: [],
+      value: [],
+      list: [],
+      loading: false,
+      states: ["Alabama1111111111111111111111111111111", "Alaska", "Arizona",
+      "Arkansas11111112222222222222222", "California", "Colorado",
+      "Connecticut", "Delaware", "Florida",
+      "Georgia", "Hawaii", "Idaho", "Illinois",
+      "Indiana", "Iowa", "Kansas", "Kentucky",
+      "Louisiana", "Maine", "Maryland",
+      "Massachusetts", "Michigan", "Minnesota",
+      "Mississippi", "Missouri", "Montana",
+      "Nebraska", "Nevada", "New Hampshire",
+      "New Jersey", "New Mexico", "New York",
+      "North Carolina", "North Dakota", "Ohio",
+      "Oklahoma", "Oregon", "Pennsylvania",
+      "Rhode Island", "South Carolina",
+      "South Dakota", "Tennessee", "Texas",
+      "Utah", "Vermont", "Virginia",
+      "Washington", "West Virginia", "Wisconsin",
+      "Wyoming"]
     }
+  },
+  mounted() {
+    this.list = this.states.map(item => {
+        return { value: `${item}`, label: `${item}` };
+      });
   },
   methods: {
     login: function() {
@@ -42,6 +83,20 @@ export default {
         sessionStorage.setItem('token', response.data._csrf)
         this.$router.push({ path: '/main' })
       })
+    },
+    remoteMethod(query) {
+      if (query !== '') {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.options = this.list.filter(item => {
+            return item.label.toLowerCase()
+              .indexOf(query.toLowerCase()) > -1;
+          });
+        }, 200);
+      } else {
+        this.options = [];
+      }
     }
   }
 }
